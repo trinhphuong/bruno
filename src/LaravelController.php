@@ -142,7 +142,9 @@ abstract class LaravelController extends Controller
             'page' => null,
             'mode' => 'embed',
             'filter_groups' => [],
-            'options' => []
+            'options' => [],
+            'skip' => null,
+            'take' => null
         ], $this->defaults);
 
         $includes = $this->parseIncludes($request->get('includes', $this->defaults['includes']));
@@ -152,7 +154,8 @@ abstract class LaravelController extends Controller
         $page = $request->get('page', $this->defaults['page']);
         $filter_groups = $this->parseFilterGroups($request->get('filter_groups', $this->defaults['filter_groups']));
         $options = $request->get('options', $this->defaults['options']);
-
+        $skip = $request->get('skip', $this->defaults['skip']);
+        $take = $request->get('take', $this->defaults['take']);
         if ($page !== null && $limit === null) {
             throw new InvalidArgumentException('Cannot use page option without limit option');
         }
@@ -165,7 +168,9 @@ abstract class LaravelController extends Controller
             'limit' => $limit,
             'page' => $page,
             'filter_groups' => $filter_groups,
-            'options' => $options
+            'options' => $options,
+            'skip'      => $skip,
+            'take'      => $take
         ];
     }
 }
