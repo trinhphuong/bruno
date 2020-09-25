@@ -349,7 +349,7 @@ trait EloquentBuilderTrait
                     $relation->getQualifiedForeignPivotKeyName(),
                     $type
                 );
-            }
+            } 
             $table = $model->getTable();
             $queryBuilder->select(sprintf('%s.*', $table));
         }
