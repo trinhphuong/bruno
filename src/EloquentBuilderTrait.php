@@ -98,10 +98,11 @@ trait EloquentBuilderTrait
                 $tmp = explode('.', $first['key']);
                 $first['key'] = $tmp[1];
                 $queryBuilder->whereHas($tmp[0], function ($query) use ($first, $or, &$joins,$filters) {
-                    foreach($filters as $filter){
+                    foreach($filters as $key => $filter){
+                        $_or = (@$filter['or']) ? $filter['or'] : $or;
                         $exp = \explode('.',$filter['key']);
                         $filter['key'] = $exp[1];
-                        $this->applyFilter($query, $filter, $or, $joins);
+                        $this->applyFilter($query, $filter, $_or, $joins);
                     }
                 });
             } else {
